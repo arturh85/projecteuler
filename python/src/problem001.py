@@ -27,12 +27,17 @@ def solve(limit=1000):
     
     return msum
 
+def solve_functional(limit=1000):
+    def f(i):
+        return i % 3 == 0 or i % 5 == 0
+    return sum(filter(f, range(1, limit)))
+
 
 class Test(unittest.TestCase):
     def testSample(self):
-        self.assertEqual(23, solve(10))
+        self.assertEqual(23, solve_functional(10))
     def testAnswer(self):
-        self.assertEqual(233168, solve())
+        self.assertEqual(233168, solve_functional())
         
         
 # -----------------------------------------
