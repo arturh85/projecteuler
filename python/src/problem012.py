@@ -121,6 +121,10 @@ class Test(unittest.TestCase):
 def run():
     solve(500)
 
+
+if __name__ == '__main__':
+    unittest.main()
+
 if __name__ == '__main__':
     t = timeit.Timer("run()", "from __main__ import run")
     count = 1

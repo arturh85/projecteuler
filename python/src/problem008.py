@@ -2,7 +2,7 @@
 Problem 8
 11 January 2002
 
-Find the greatest product of five consecutive digits in the 1000-digit number.
+The four adjacent digits in the 1000-digit number that have the greatest product are 9 x 9 x 8 x 9 = 5832.
 
 73167176531330624919225119674426574742355349194934
 96983520312774506326239578318016984801869478851843
@@ -25,6 +25,7 @@ Find the greatest product of five consecutive digits in the 1000-digit number.
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450
 
+Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
 
 ----------------------------------------------------------
 Created on 25.01.2012
@@ -73,13 +74,16 @@ def solve(nrStr, count):
 
 class Test(unittest.TestCase):
     def testAnswer(self):
-        self.assertEqual(40824, solve(nr, 5))
+        self.assertEqual(23514624000, solve(nr, 13))
        
         
 # -----------------------------------------
 
 def run():
     solve(nr, 5)
+
+if __name__ == '__main__':
+    unittest.main()
 
 if __name__ == '__main__':
     t = timeit.Timer("run()", "from __main__ import run")

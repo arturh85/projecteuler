@@ -179,6 +179,9 @@ def run():
     solve(grid, 20, 20)
 
 if __name__ == '__main__':
+    unittest.main()
+
+if __name__ == '__main__':
     t = timeit.Timer("run()", "from __main__ import run")
     count = 1
     print str(t.timeit(count)) + " seconds for " + str(count) + " runs"

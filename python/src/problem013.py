@@ -219,11 +219,11 @@ numbers = [
 ]
 
 def solve(number):
-    return int(str(number)[0:10])
+    return int(str(sum(number))[0:10])
 
 class Test(unittest.TestCase):    
     def testAnswer(self):
-        self.assertEqual(5537376230, solve(sum(numbers)))
+        self.assertEqual(5537376230, solve(numbers))
        
         
 # -----------------------------------------
@@ -232,8 +232,10 @@ def run():
     solve(sum(numbers))
 
 if __name__ == '__main__':
+    unittest.main()
+
+if __name__ == '__main__':
     t = timeit.Timer("run()", "from __main__ import run")
     count = 10000
     print str(t.timeit(count)) + " seconds for " + str(count) + " runs"
-    
     

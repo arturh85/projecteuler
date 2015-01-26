@@ -1,4 +1,4 @@
-langsame tests:
+slow tests:
 
 problem 005: 3.7s
 problem 010: 5.8s
