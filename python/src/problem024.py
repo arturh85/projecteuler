@@ -26,15 +26,23 @@ import math
 lexicographic_permutations_cache = {}
 
 def lexicographic_permutations(objects):
+    if lexicographic_permutations_cache.has_key(objects):
+        for x in lexicographic_permutations_cache[objects]:
+            yield x
+    
     cnt = len(objects)
-    if cnt <= 1: 
-        yield objects
-        return
+    if cnt == 1: yield objects
     
     for first in objects:
         rest = objects.replace(first, '')
+        cache_value = ''
         for others in lexicographic_permutations(rest):
+            cache_value += others
             yield first + others
+        
+        #lexicographic_permutations_cache[rest] = cache_value
+            
+        
  
 def solve(objects='0123456789', index=1000000):
     i = 1
