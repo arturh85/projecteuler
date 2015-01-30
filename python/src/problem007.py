@@ -14,19 +14,14 @@ Created on 25.01.2012
 '''
 import unittest
 import timeit
-from problem003 import is_prime
+from problem003 import primes
 
 def prime_at(nr):
-    if nr == 1: return 2
-    
-    i = 3
     prime_nr = 1
-    while True:
-        if is_prime(i):
-            prime_nr += 1
-            if prime_nr == nr:
-                return i
-        i += 2
+    for prime in primes():
+        if prime_nr == nr:
+            return prime
+        prime_nr += 1
 
 class Test(unittest.TestCase):
     def testSimple1(self):

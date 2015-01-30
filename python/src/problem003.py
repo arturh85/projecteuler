@@ -33,13 +33,22 @@ def is_prime(number, primes=None):
             i += 1
     else:
         for x in primes:
-            if x > limit: return True
-        
+            if x > limit:
+                return True
             if number % x == 0:
                 return False
-        
     return True
 
+
+def primes():
+    discovered = [2]
+    yield 2
+    i = 3
+    while True:
+        if is_prime(i, discovered):
+            yield i
+            discovered.append(i)
+        i += 2
 
 def prime_factors(number):
     factors = [1]
