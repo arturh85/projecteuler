@@ -14,11 +14,11 @@ Created on 25.01.2012
 '''
 import unittest
 import timeit
-from problem003 import primes
+from problem003 import generate_primes
 
 def prime_at(nr):
     prime_nr = 1
-    for prime in primes():
+    for prime in generate_primes():
         if prime_nr == nr:
             return prime
         prime_nr += 1

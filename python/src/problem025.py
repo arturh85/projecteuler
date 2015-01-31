@@ -32,11 +32,11 @@ Created on 04.02.2012
 import unittest
 import timeit
 
-from problem002 import fibonacci_sequence
+from problem002 import generate_fibonacci_sequence
 
 def solve(over=1000):
     i = 1
-    for x in fibonacci_sequence():
+    for x in generate_fibonacci_sequence():
         if x >= over:
             return i
         i += 1

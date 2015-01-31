@@ -40,7 +40,7 @@ def is_prime(number, primes=None):
     return True
 
 
-def primes():
+def generate_primes():
     discovered = [2]
     yield 2
     i = 3
@@ -65,8 +65,7 @@ def prime_factors(number):
 What is the largest prime factor of the number 600851475143 ?
 '''
 def solve(number=600851475143):
-    factors = prime_factors(number)
-    return factors[len(factors)-1]
+    return max(prime_factors(number))
 
 class Test(unittest.TestCase):
     def testIsPrime(self):
@@ -86,7 +85,7 @@ class Test(unittest.TestCase):
     def testSample(self):
         self.assertEqual(29, solve(13195))
     def testAnswer(self):
-        self.assertEqual(6857, solve())
+        self.assertEqual(6857, solve(600851475143))
         
         
 # -----------------------------------------

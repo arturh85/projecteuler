@@ -18,7 +18,7 @@ import timeit
 import itertools
 import math
 
-from problem003 import primes
+from problem003 import generate_primes
 from problem003 import is_prime
 
 def rotations(number):
@@ -37,7 +37,7 @@ def is_circular_prime(i):
 
 def circular_primes_below(limit):
     circular_primes = []
-    for prime in primes():
+    for prime in generate_primes():
         p = is_circular_prime(prime)
         if prime > limit:
             break

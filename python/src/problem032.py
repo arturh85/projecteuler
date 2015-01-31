@@ -35,6 +35,12 @@ def to_number(lst):
         return 0
     return int(''.join(map(str, lst)))
 
+def generate_pandigital_numbers(lower=1, upper=9):
+    state = range(lower, upper+1)
+    for i in itertools.permutations(state):
+        n = int(''.join(map(str, list(i))))
+        yield n
+
 # checks multiplicand/multiplier/product identity and returns it or None when none found
 def find_identity(state):
     for offset in range(2, 5):
@@ -69,9 +75,8 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    state = range(1, 10)
     products = []
-    for i in itertools.permutations(state):
+    for i in generate_pandigital_numbers(1, 9):
         identity = find_identity(i)
         if identity:
             print "identity found: " + str(identity[0]) + " * " + str(identity[1]) + ' = ' + str(identity[2])

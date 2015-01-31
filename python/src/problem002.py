@@ -18,7 +18,7 @@ Created on 25.01.2012
 import unittest
 import timeit
 
-def fibonacci_sequence(limit=0):
+def generate_fibonacci_sequence(limit=0):
     a = 1
     yield a
     
@@ -42,7 +42,7 @@ exceed four million, find the sum of the even-valued terms.
 def solve(limit=4000000):
     msum = 0
 
-    for i in fibonacci_sequence(limit):
+    for i in generate_fibonacci_sequence(limit):
         if i % 2 == 0:
             msum += i
 
@@ -50,10 +50,10 @@ def solve(limit=4000000):
 
 
 class Test(unittest.TestCase):
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual(44, solve(100))
         
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(4613732, solve())
         
         
