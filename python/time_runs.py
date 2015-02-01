@@ -86,7 +86,7 @@ for o in range(1, 51):
         # seconds = 3.3
         result = str(round(seconds, 4)).ljust(6, '0')
         if seconds > 60:
-            result = "** " + result + " **"
+            result = "**" + result + "**"
     except Exception as e:
         print e
         result = ""
