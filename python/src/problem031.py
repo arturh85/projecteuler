@@ -19,34 +19,39 @@ import timeit
 
 british_coins = [1, 2, 5, 10, 20, 50, 100, 200]
 
+
 def coinCombinations(val, coins):
     c = sorted(coins, reverse=True)
 
-    #combinations =
+    # combinations =
+
 
 def solve():
-    # s = 0
-    # for i in range(1, 1000000):
-    #     if check_number(i, 5):
-    #         print("found number: " + str(i))
-    #         s += i
-    #
-    # print("sum: " + str(s))
-    
+    pass
 
-class Test(unittest.TestCase):        
-    def testSample(self):
-        self.assertEquals(200, sum([1*100, 1*50, 2*20, 1*5, 1*2, 3*1]))
+# s = 0
+# for i in range(1, 1000000):
+# if check_number(i, 5):
+#         print("found number: " + str(i))
+#         s += i
+#
+# print("sum: " + str(s))
+
+
+class Test(unittest.TestCase):
+    def test_sample(self):
+        self.assertEquals(200, sum([1 * 100, 1 * 50, 2 * 20, 1 * 5, 1 * 2, 3 * 1]))
         pass
-                             
-    def testAnswer(self):
+
+    def test_answer(self):
         pass
-       
-        
+
+
 # -----------------------------------------
 
 def run():
-    raise 'not implemented'
+    raise Exception('not implemented')
+
 
 if __name__ == '__main__':
     t = timeit.Timer("run()", "from __main__ import run")

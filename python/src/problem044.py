@@ -75,7 +75,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    raise "not implemented"
+    raise Exception("not implemented")
     pass
 
 

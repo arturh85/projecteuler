@@ -51,8 +51,15 @@ def find_identity(state):
             return [multiplicand, multiplier, product]
     return None
 
-# 39 x 186 = 7254
-# 391867254
+
+def solve():
+    products = []
+    for i in generate_pandigital_numbers(1, 9):
+        identity = find_identity(i)
+        if identity:
+            products.append(identity[2])
+    return sum(set(products))
+
 
 class Test(unittest.TestCase):
     def testIsPandigital(self):
@@ -75,14 +82,8 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    products = []
-    for i in generate_pandigital_numbers(1, 9):
-        identity = find_identity(i)
-        if identity:
-            print "identity found: " + str(identity[0]) + " * " + str(identity[1]) + ' = ' + str(identity[2])
-            products.append(identity[2])
+    solve()
 
-    print "result: " + str(sum(set(products)))
 
 if __name__ == '__main__':
     #run()
