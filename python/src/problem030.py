@@ -39,29 +39,29 @@ def check_number(number, exp):
 
     return sum == number
 
+def solve():
+    s = 0
+    for i in range(1, 1000000):
+        if check_number(i, 5):
+            s += i
+    return s
 
 class Test(unittest.TestCase):        
-    def testSample(self):
+    def test_sample(self):
         self.assertFalse(check_number(1, 4))
         self.assertTrue(check_number(1634, 4))
         self.assertTrue(check_number(8208, 4))
         self.assertTrue(check_number(9474, 4))
         pass
                              
-    def testAnswer(self):
+    def test_answer(self):
         pass
        
         
 # -----------------------------------------
 
 def run():
-    sum = 0
-    for i in range(1, 1000000):
-        if check_number(i, 5):
-            print("found number: " + str(i))
-            sum += i
-
-    print("sum: " + str(sum))
+    solve()
 
 if __name__ == '__main__':
     t = timeit.Timer("run()", "from __main__ import run")

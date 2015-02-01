@@ -37,8 +37,8 @@ def is_pentagonal_number(n):
 
 def solve():
     min_distance = 999999
-    for a in range(1, 10000):
-        for b in range(1, 10000):
+    for a in range(1, 100):
+        for b in range(1, 100):
             if a == b:
                 continue
             c = pentagonal_numbers_at(a)

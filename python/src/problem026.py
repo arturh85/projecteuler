@@ -139,7 +139,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    solve(1000, 2000, True) # 23 s
+    solve(1000, 2000, False) # 23 s
 
 if __name__ == '__main__':
     t = timeit.Timer("run()", "from __main__ import run")
