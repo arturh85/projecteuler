@@ -24,12 +24,6 @@ import unittest
 import timeit
 import math
 
-from problem042 import is_triangle_number
-from problem042 import generate_triangle_numbers
-from problem042 import generate_numbers
-from problem042 import is_number
-from problem044 import is_pentagonal_number
-
 from problem003 import is_prime
 from problem003 import generate_primes
 

@@ -19,10 +19,7 @@ Created on 30.01.2015
 '''
 import unittest
 import timeit
-import itertools
 import operator
-
-from problem032 import is_pandigital
 
 
 def generate_problem_fraction():

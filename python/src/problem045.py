@@ -35,10 +35,10 @@ def generate_hexagonal_number():
 
 
 def is_hexagonal_number(n):
-    return is_number(generate_hexagonal_number, 'hexagonal', n)
+    return is_number(hexagonal_number_at, 'hexagonal', n)
 
 
-# FIXME: way to slow, 320s
+# FIXME: way to slow, 88s
 def solve():
     for triangle_number in generate_triangle_numbers():
         if triangle_number > 40755 and is_pentagonal_number(triangle_number) and is_hexagonal_number(triangle_number):
@@ -52,7 +52,7 @@ class Test(unittest.TestCase):
         pass
 
     def test_answer(self):
-        # self.assertEqual(1533776805, solve())
+        self.assertEqual(1533776805, solve())
         pass
 
 

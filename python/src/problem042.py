@@ -19,11 +19,6 @@ Created on 30.01.2015
 '''
 import unittest
 import timeit
-import itertools
-import operator
-
-from problem003 import generate_primes
-from problem032 import is_pandigital
 
 
 def triangle_numbers_at(n):
@@ -44,26 +39,28 @@ def generate_triangle_numbers():
 is_number_cache = {}
 
 
-def is_number(generator, cache_name, n):
+def is_number(func, cache_name, n):
     global is_number_cache
 
     if cache_name not in is_number_cache:
-        is_number_cache[cache_name] = {}
+        is_number_cache[cache_name] = {
+            "max": 0,
+            "list": []
+        }
 
-    if n not in is_number_cache[cache_name]:
-        for i in generator():
-            if i == n:
-                is_number_cache[cache_name][n] = True
-                break
-            if i > n:
-                is_number_cache[cache_name][n] = False
+    if is_number_cache[cache_name]["max"] < n:
+        while True:
+            is_number_cache[cache_name]["max"] += 1
+            value = func(is_number_cache[cache_name]["max"])
+            is_number_cache[cache_name]["list"].append(value)
+            if value > n:
                 break
 
-    return is_number_cache[cache_name][n]
+    return n in is_number_cache[cache_name]["list"]
 
 
 def is_triangle_number(n):
-    return is_number(generate_triangle_numbers, 'triangle', n)
+    return is_number(triangle_numbers_at, 'triangle', n)
 
 
 def char_value(char):

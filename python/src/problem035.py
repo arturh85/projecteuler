@@ -15,8 +15,6 @@ Created on 29.01.2015
 '''
 import unittest
 import timeit
-import itertools
-import math
 
 from problem003 import generate_primes
 from problem003 import is_prime

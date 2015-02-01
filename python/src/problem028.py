@@ -21,10 +21,9 @@ Created on 12.04.2012
 '''
 import unittest
 import timeit
-from problem003 import is_prime
 
 def print_table(table):
-    s = "";
+    s = ""
     for row in table:
         for column in row:
             s += str(column) + " "

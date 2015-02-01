@@ -16,7 +16,6 @@ Created on 11.12.2012
 '''
 import unittest
 import timeit
-import math
 
 british_coins = [1, 2, 5, 10, 20, 50, 100, 200]
 

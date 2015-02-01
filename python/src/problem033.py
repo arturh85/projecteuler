@@ -18,8 +18,6 @@ Created on 29.01.2015
 '''
 import unittest
 import timeit
-import itertools
-
 
 def join_digits(firstDigit, secondDigit):
     return float(str(firstDigit) + str(secondDigit))

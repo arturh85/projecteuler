@@ -22,20 +22,8 @@ Created on 30.01.2015
 '''
 import unittest
 import timeit
-import math
-import operator
-
-from problem042 import is_triangle_number
-from problem042 import generate_triangle_numbers
-from problem042 import generate_numbers
-from problem042 import is_number
-from problem044 import is_pentagonal_number
-
-from problem003 import is_prime
-from problem003 import generate_primes
 
 from problem003 import prime_factors
-
 
 def check_problem_property(numbers):
     number_factors = map(prime_factors, numbers)

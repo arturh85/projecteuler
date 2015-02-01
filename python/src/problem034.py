@@ -14,7 +14,6 @@ Created on 29.01.2015
 '''
 import unittest
 import timeit
-import itertools
 import math
 
 

@@ -22,11 +22,8 @@ Created on 30.01.2015
 '''
 import unittest
 import timeit
-import itertools
-import operator
 
 from problem032 import generate_pandigital_numbers
-from problem032 import is_pandigital
 from problem003 import generate_primes
 
 

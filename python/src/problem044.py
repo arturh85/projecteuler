@@ -18,8 +18,6 @@ Created on 30.01.2015
 '''
 import unittest
 import timeit
-import itertools
-import operator
 
 from problem042 import generate_numbers
 from problem042 import is_number
@@ -34,7 +32,7 @@ def generate_pentagonal_numbers():
 
 
 def is_pentagonal_number(n):
-    return is_number(generate_pentagonal_numbers, 'pentagonal', n)
+    return is_number(pentagonal_numbers_at, 'pentagonal', n)
 
 
 def solve():
