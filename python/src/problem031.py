@@ -19,42 +19,60 @@ import timeit
 
 british_coins = [1, 2, 5, 10, 20, 50, 100, 200]
 
+def add_coins(state, coins):
+    res = 0
+    for i in range(0, len(state)):
+        res += state[i] * coins[i]
+    return res
 
-def coinCombinations(val, coins):
-    c = sorted(coins, reverse=True)
-
-    # combinations =
-
-
-def solve():
-    pass
-
-# s = 0
-# for i in range(1, 1000000):
-# if check_number(i, 5):
-#         print("found number: " + str(i))
-#         s += i
-#
-# print("sum: " + str(s))
-
+def solve(n=200):
+    global british_coins
+    cnt = 0
+    for a in range(0, n / british_coins[0] + 1):
+        for b in range(0, n / british_coins[1] + 1):
+            if add_coins([a, b], british_coins) > n:
+                continue
+            for c in range(0, n / british_coins[2] + 1):
+                if add_coins([a, b, c], british_coins) > n:
+                    continue
+                for d in range(0, n / british_coins[3] + 1):
+                    if add_coins([a, b, c, d], british_coins) > n:
+                        continue
+                    for e in range(0, n / british_coins[4] + 1):
+                        if add_coins([a, b, c, d, e], british_coins) > n:
+                            continue
+                        for f in range(0, n / british_coins[5] + 1):
+                            if add_coins([a, b, c, d, e, f], british_coins) > n:
+                                continue
+                            for g in range(0, n / british_coins[6] + 1):
+                                if add_coins([a, b, c, d, e, f, g], british_coins) > n:
+                                    continue
+                                for h in range(0, n / british_coins[7] + 1):
+                                    if add_coins([a, b, c, d, e, f, g, h], british_coins) == n:
+                                        cnt += 1
+    return cnt
 
 class Test(unittest.TestCase):
     def test_sample(self):
         self.assertEquals(200, sum([1 * 100, 1 * 50, 2 * 20, 1 * 5, 1 * 2, 3 * 1]))
+        self.assertEqual(1, solve(1))
+        self.assertEqual(2, solve(2))
+        self.assertEqual(2, solve(3))
+
         pass
 
     def test_answer(self):
+        self.assertEqual(73682, solve(200))
         pass
 
 
 # -----------------------------------------
 
 def run():
-    raise Exception('not implemented')
+    return solve()
 
 
 if __name__ == '__main__':
     t = timeit.Timer("run()", "from __main__ import run")
     count = 1
     print(str(t.timeit(count)) + " seconds for " + str(count) + " runs")
-    
