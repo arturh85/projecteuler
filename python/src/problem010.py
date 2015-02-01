@@ -49,7 +49,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    prime_sum(2000000)
+    return prime_sum(2000000)
 
 if __name__ == '__main__':
     unittest.main()

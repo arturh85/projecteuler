@@ -19,23 +19,29 @@ from problem003 import generate_primes
 from problem032 import is_pandigital
 
 def solve():
+    largest = 0
     for prime in generate_primes():
         if is_pandigital(prime):
-            print prime
+            largest = prime
+            
+        if prime > 10000000:
+            return largest
+                  
 
 class Test(unittest.TestCase):
     def test_sample(self):
         pass
 
     def test_answer(self):
+        self.assertEqual(7652413, solve())
         pass
+
 
 
 # -----------------------------------------
 
 def run():
-    #solve()
-    pass
+    return solve()
 
 
 if __name__ == '__main__':

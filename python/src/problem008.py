@@ -80,7 +80,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    solve(nr, 5)
+    return solve(nr, 5)
 
 if __name__ == '__main__':
     unittest.main()

@@ -230,7 +230,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    solve(numbers)
+    return solve(numbers)
 
 if __name__ == '__main__':
     unittest.main()

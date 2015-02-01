@@ -176,7 +176,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    solve(grid, 20, 20)
+    return solve(grid, 20, 20)
 
 if __name__ == '__main__':
     unittest.main()

@@ -31,7 +31,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    digit_sum(2**1000)
+    return digit_sum(2**1000)
 
 if __name__ == '__main__':
     unittest.main()

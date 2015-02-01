@@ -39,7 +39,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    factorial_sum(100)
+    return factorial_sum(100)
 
 if __name__ == '__main__':
     unittest.main()

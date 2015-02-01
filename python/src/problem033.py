@@ -61,18 +61,18 @@ def find_curious_fractions():
 
 
 class Test(unittest.TestCase):
-    def testSample(self):
+    def test_sample(self):
         find_curious_fractions()
         self.assertEqual(49.0/98.0, 4.0/8.0)
 
-    def testAnswer(self):
+    def test_answer(self):
         pass
        
         
 # -----------------------------------------
 
 def run():
-    find_curious_fractions()
+    return find_curious_fractions()
 
 if __name__ == '__main__':
     run()

@@ -91,7 +91,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    solve(3)
+    return solve(3)
 
 
 if __name__ == '__main__':

@@ -55,7 +55,7 @@ def find_identity(state):
 def solve():
     products = []
     for i in generate_pandigital_numbers(1, 9):
-        identity = find_identity(i)
+        identity = find_identity(list(str(i)))
         if identity:
             products.append(identity[2])
     return sum(set(products))
@@ -76,13 +76,14 @@ class Test(unittest.TestCase):
         pass
                              
     def testAnswer(self):
+        self.assertEqual(45228, solve())
         pass
        
         
 # -----------------------------------------
 
 def run():
-    solve()
+    return solve()
 
 
 if __name__ == '__main__':

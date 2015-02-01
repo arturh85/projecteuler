@@ -37,7 +37,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    prime_at(10001)
+    return prime_at(10001)
 
 if __name__ == '__main__':
     unittest.main()

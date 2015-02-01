@@ -76,7 +76,6 @@ class Test(unittest.TestCase):
 
 def run():
     raise Exception("not implemented")
-    pass
 
 
 if __name__ == '__main__':

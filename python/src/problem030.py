@@ -61,7 +61,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    solve()
+    return solve()
 
 if __name__ == '__main__':
     t = timeit.Timer("run()", "from __main__ import run")

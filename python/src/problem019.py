@@ -73,7 +73,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    pass
+    return solve()
 
 if __name__ == '__main__':
     unittest.main()

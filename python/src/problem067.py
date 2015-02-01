@@ -70,7 +70,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    max_sum_route(triangle_2, 79)
+    return max_sum_route(triangle_2, 79)
 
 if __name__ == '__main__':
     unittest.main()
