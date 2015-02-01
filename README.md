@@ -2,6 +2,8 @@
 Solutions for Project Euler Problems, see https://projecteuler.net/problems
 
 # status
+|    # |                                     Name |            |                                                             |                                                                                                  |
+| ---- | ---------------------------------------- | ---------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 |    1 |                     Multiples of 3 and 5 |     0.0001 | [Project Euler Problem](https://projecteuler.net/problem=1) | [Solution Source](https://github.com/arturh85/projecteuler/blob/master/python/src/problem001.py) |
 |    2 |                   Even Fibonacci numbers |     0.0000 | [Project Euler Problem](https://projecteuler.net/problem=2) | [Solution Source](https://github.com/arturh85/projecteuler/blob/master/python/src/problem002.py) |
 |    3 |                     Largest prime factor |     0.8634 | [Project Euler Problem](https://projecteuler.net/problem=3) | [Solution Source](https://github.com/arturh85/projecteuler/blob/master/python/src/problem003.py) |
