@@ -24,12 +24,13 @@ import timeit
 
 def read_names(filename):
     f = open(filename, 'r')
-    names = f.readline().replace('"', '').split(',')
+    lst = f.readline().replace('"', '').split(',')
     f.close()
-    return names
+    return lst
 
 names = read_names('data/problem022.txt')
 names.sort()
+
 
 def solve():
     scores = 0
@@ -40,18 +41,25 @@ def solve():
 
     return scores
 
-def score(name, position):
-    score = 0
-    for c in name:
-        score += ord(c)-ord('A') + 1
 
-    return score * position
+def char_value(char):
+    return ord(char) - ord('A') + 1
+
+
+def word_value(word):
+    return sum(map(char_value, list(word)))
+
+
+def score(name, position):
+    s = word_value(name)
+    return s * position
+ 
  
 class Test(unittest.TestCase):        
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual(49714, score('COLIN', 938))
                              
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(871198282, solve())       
         
 # -----------------------------------------
@@ -62,9 +70,9 @@ def run():
 if __name__ == '__main__':
     unittest.main()
 
-if __name__ == '__main__':
-    t = timeit.Timer("run()", "from __main__ import run")
-    count = 100000
-    print str(t.timeit(count)) + " seconds for " + str(count) + " runs"
-    
-    
+# if __name__ == '__main__':
+#     t = timeit.Timer("run()", "from __main__ import run")
+#     count = 100000
+#     print str(t.timeit(count)) + " seconds for " + str(count) + " runs"
+#
+#

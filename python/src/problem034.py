@@ -24,25 +24,30 @@ def is_curious_number(number):
     digits = map(int, list(str(number)))
     return number == sum(map(math.factorial, digits))
 
+def solve():
+    curious_numbers = []
+    for i in range(1, 100000):
+        if is_curious_number(i):
+            # print("found curious number: " + str(i))
+            curious_numbers.append(i)
+
+    # print "result: " + str(sum(curious_numbers))
+    return sum(curious_numbers)
+
 class Test(unittest.TestCase):
     def testSample(self):
         self.assertEqual(1, math.factorial(0))
         self.assertEqual(1, math.factorial(1))
         pass
     def testAnswer(self):
+        self.assertEqual(40730, solve())
         pass
        
         
 # -----------------------------------------
 
 def run():
-    curious_numbers = []
-    for i in range(1, 100000):
-        if is_curious_number(i):
-            print("found curious number: " + str(i))
-            curious_numbers.append(i)
-
-    print "result: " + str(sum(curious_numbers))
+    solve()
 
 if __name__ == '__main__':
     #run()

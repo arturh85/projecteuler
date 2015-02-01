@@ -43,13 +43,23 @@ def circular_primes_below(limit):
             circular_primes += p
     return set(circular_primes)
 
+def solve():
+    limit = 1000000
+    circular_primes = circular_primes_below(limit)
+    # print "there are " + str(len(circular_primes)) + " circular primes below " + str(limit)
+    # circular_primes = list(circular_primes)
+    # circular_primes.sort()
+    # for prime in circular_primes:
+    #     print prime
+    return len(circular_primes)
+
 class Test(unittest.TestCase):
-    def testSample(self):
+    def test_sample(self):
         self.assertFalse(is_circular_prime(23))
         self.assertTrue(is_circular_prime(197))
         self.assertEqual(13, len(circular_primes_below(100)))
 
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(55, len(circular_primes_below(1000000)))
         pass
        
@@ -57,13 +67,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    limit = 1000000
-    circular_primes = circular_primes_below(limit)
-    print "there are " + str(len(circular_primes)) + " circular primes below " + str(limit)
-    circular_primes = list(circular_primes)
-    circular_primes.sort()
-    for prime in circular_primes:
-        print prime
+    solve()
 
 if __name__ == '__main__':
     unittest.main()

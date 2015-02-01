@@ -37,19 +37,20 @@ def solve():
         for n in range(2, 7):
             product = concat_product(i, range(1, n))
             if len(str(product)) == 9 and is_pandigital(product):
-                print "found: " + str(product) + " (" + str(i) + " * " + str(range(1, n)) + ")"
+                # print "found: " + str(product) + " (" + str(i) + " * " + str(range(1, n)) + ")"
                 if product > biggest:
                     biggest = product
-    print "solution:" + str(biggest)
+    # print "solution:" + str(biggest)
+    return biggest
 
 
 class Test(unittest.TestCase):
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual(192384576, concat_product(192, (1, 2, 3)))
         self.assertEqual(918273645, concat_product(9, (1, 2, 3, 4, 5)))
         pass
 
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(932718654, concat_product(9327, (1, 2)))
 
     pass

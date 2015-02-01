@@ -91,8 +91,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    solve_functional_mapreduce(3)
-    #solve(3)
+    solve(3)
 
 
 if __name__ == '__main__':

@@ -30,8 +30,7 @@ def solve():
     for i in range(1, 1000000):
         if is_palindrome_base2(i) and is_palindrome_base10(i):
             numbers.append(i)
-
-    print "result: " + str(sum(numbers))
+    return sum(numbers)
 
 
 class Test(unittest.TestCase):

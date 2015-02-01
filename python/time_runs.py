@@ -80,8 +80,8 @@ f.write(makeline("-" * 4, "-" * 40, "-" * 10, "-" * 60, "-" * 100))
 for o in range(1, 51):
     t = timeit.Timer("result = run()", "from src.problem%03d" % o + " import run")
     try:
-        # seconds = t.timeit(1)
-        seconds = 3.3
+        seconds = t.timeit(1)
+        # seconds = 3.3
         result = str(round(seconds, 4)).ljust(6, '0')
     except:
         result = "error"

@@ -218,24 +218,25 @@ numbers = [
     53503534226472524250874054075591789781264330331690,
 ]
 
-def solve(number):
-    return int(str(sum(number))[0:10])
+def solve(lst):
+    s = str(sum(lst))
+    return int(s[0:10])
 
 class Test(unittest.TestCase):    
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(5537376230, solve(numbers))
        
         
 # -----------------------------------------
 
 def run():
-    solve(sum(numbers))
+    solve(numbers)
 
 if __name__ == '__main__':
     unittest.main()
 
-if __name__ == '__main__':
-    t = timeit.Timer("run()", "from __main__ import run")
-    count = 10000
-    print str(t.timeit(count)) + " seconds for " + str(count) + " runs"
-    
+# if __name__ == '__main__':
+#     t = timeit.Timer("run()", "from __main__ import run")
+#     count = 10000
+#     print str(t.timeit(count)) + " seconds for " + str(count) + " runs"
+#

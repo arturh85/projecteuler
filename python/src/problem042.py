@@ -20,6 +20,9 @@ Created on 30.01.2015
 import unittest
 import timeit
 
+from problem022 import char_value
+from problem022 import word_value
+
 
 def triangle_numbers_at(n):
     return 1.0 / 2.0 * n * (n + 1)
@@ -63,12 +66,6 @@ def is_triangle_number(n):
     return is_number(triangle_numbers_at, 'triangle', n)
 
 
-def char_value(char):
-    return ord(char) - ord('A') + 1
-
-
-def word_value(word):
-    return sum(map(char_value, list(word)))
 
 
 def read_words(filename):

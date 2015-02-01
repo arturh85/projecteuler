@@ -24,6 +24,15 @@ def coinCombinations(val, coins):
 
     #combinations =
 
+def solve():
+    # s = 0
+    # for i in range(1, 1000000):
+    #     if check_number(i, 5):
+    #         print("found number: " + str(i))
+    #         s += i
+    #
+    # print("sum: " + str(s))
+    
 
 class Test(unittest.TestCase):        
     def testSample(self):
@@ -37,13 +46,7 @@ class Test(unittest.TestCase):
 # -----------------------------------------
 
 def run():
-    sum = 0
-    for i in range(1, 1000000):
-        if check_number(i, 5):
-            print("found number: " + str(i))
-            sum += i
-
-    print("sum: " + str(sum))
+    raise 'not implemented'
 
 if __name__ == '__main__':
     t = timeit.Timer("run()", "from __main__ import run")

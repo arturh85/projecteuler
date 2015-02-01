@@ -49,13 +49,14 @@ def find_curious_fractions():
                     d = float(str(b).replace(cancel_digit, ''))
 
                     if a/b == c/d:
-                        print("found curious fraction: " +
-                              str(int(a)) + "/" + str(int(b)) + " == " +
-                              str(int(c)) + "/" + str(int(d)))
+                        # print("found curious fraction: " +
+                        #       str(int(a)) + "/" + str(int(b)) + " == " +
+                        #       str(int(c)) + "/" + str(int(d)))
                         numerator_product *= c
                         denominator_product *= d
 
-    print "resulting fraction: " + str(int(numerator_product)) + "/" + str(int(denominator_product))
+    # print "resulting fraction: " + str(int(numerator_product)) + "/" + str(int(denominator_product))
+    return str(int(numerator_product)) + "/" + str(int(denominator_product))
 
 
 

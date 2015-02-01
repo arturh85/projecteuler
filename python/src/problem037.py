@@ -44,15 +44,10 @@ def solve():
     numbers = []
     for prime in generate_primes():
         if is_truncatable_prime(prime):
-            print "found: " + str(prime)
             numbers.append(prime)
             if len(numbers) >= 11:
                 break
-
-    print "results: "
-    print numbers
-
-    print "solution: " + str(sum(numbers))
+    return sum(numbers)
 
 
 class Test(unittest.TestCase):
