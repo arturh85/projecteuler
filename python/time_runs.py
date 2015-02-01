@@ -72,15 +72,16 @@ while line:
 f.write("\n")
 
 def makeline(nr, name, result, link1, link2):
-    return "| " + str(nr).rjust(4) + " | " + name.rjust(40) + " | " + result.rjust(10) + " | " + link1 + " | " + link2 + " |\n"
+    return "| " + str(nr).rjust(4) + " | " + name.rjust(40) + " | " + result.rjust(10) + " | " + link1.rjust(60) + " | " + link2.rjust(100) + " |\n"
 
-# f.write(makeline("#", "Name", "Seconds", "", ""))
+f.write(makeline("#", "Name", "Seconds", "", ""))
+f.write(makeline("-" * 4, "-" * 40, "-" * 10, "-" * 60, "-" * 100))
 
 for o in range(1, 51):
     t = timeit.Timer("result = run()", "from src.problem%03d" % o + " import run")
     try:
-        seconds = t.timeit(1)
-        # seconds = 3.3
+        # seconds = t.timeit(1)
+        seconds = 3.3
         result = str(round(seconds, 4)).ljust(6, '0')
     except:
         result = "error"
