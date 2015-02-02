@@ -32,8 +32,9 @@ def print_table(table):
 
     print(s)
 
+
 def spiral(size):
-    table= [ [ 0 for i in range(size) ] for j in range(size)]
+    table = [[0 for i in range(size)] for j in range(size)]
 
     i = 1
     x = (size/2)
@@ -68,6 +69,7 @@ def spiral(size):
 
     return table
 
+
 def count_diagonal(table, size):
     cnt = 0
 
@@ -80,15 +82,17 @@ def count_diagonal(table, size):
     return cnt
 
 
-def solve(size=5):
+
+def solve(size=1001):
     table = spiral(size)
     return count_diagonal(table, size)
 
+
 class Test(unittest.TestCase):
-    def testSample(self):
+    def test_sample(self):
         self.assertEquals(101, solve(5))
 
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEquals(669171001, solve(1001))
         pass
 
