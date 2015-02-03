@@ -21,18 +21,21 @@ Created on 04.02.2012
 import unittest
 import timeit
 
-def proper_divisors(n):
+
+def generate_proper_divisors(n):
     for x in range(1, int(n/2)+1):
         if n % x == 0:
             yield x
 
+
 def d(n):
-    return sum(proper_divisors(n))
+    return sum(generate_proper_divisors(n))
+
 
 def solve(limit):
     amicable_numbers = []
     
-    for a in range(1,limit):
+    for a in range(1, limit):
         b = d(a)
                 
         if a != b and d(b) == a: 
@@ -40,18 +43,15 @@ def solve(limit):
 
     return amicable_numbers
 
+
 class Test(unittest.TestCase):        
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual(284, d(220))
         self.assertEqual(220, d(284))
                                  
-    def testAnswer(self):
+    def test_answer(self):
         amicable_numbers = solve(10000)
-        
-        self.assertEqual(\
-             [220, 284, 1184, 1210, 2620, 2924, 5020, 5564, 6232, 6368], \
-             amicable_numbers)
-        
+        self.assertEqual([220, 284, 1184, 1210, 2620, 2924, 5020, 5564, 6232, 6368], amicable_numbers)
         self.assertEqual(31626, sum(amicable_numbers))
     pass
        
@@ -63,10 +63,10 @@ def run():
 
 if __name__ == '__main__':
     unittest.main()
-
-if __name__ == '__main__':
-    t = timeit.Timer("run()", "from __main__ import run")
-    count = 1
-    print str(t.timeit(count)) + " seconds for " + str(count) + " runs"
-    
-    
+#
+# if __name__ == '__main__':
+#     t = timeit.Timer("run()", "from __main__ import run")
+#     count = 1
+#     print str(t.timeit(count)) + " seconds for " + str(count) + " runs"
+#
+#     

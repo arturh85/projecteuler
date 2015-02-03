@@ -28,7 +28,7 @@ Created on 04.02.2012
 import unittest
 import timeit
 
-from problem021 import proper_divisors
+from problem021 import generate_proper_divisors
 
 
 def solve(limit=28123):
@@ -50,7 +50,7 @@ def solve(limit=28123):
                 sum_of_two_abundant_numbers = False
                 break
                 
-        if sum_of_two_abundant_numbers == True:
+        if sum_of_two_abundant_numbers:
             _sum += x
             
     return _sum
@@ -71,17 +71,18 @@ def deficient_perfect_or_abundant(n):
     if deficient_perfect_or_abundant_cache.has_key(n):
         return deficient_perfect_or_abundant_cache[n]
     
-    k = sum(proper_divisors(n)) - n
+    k = sum(generate_proper_divisors(n)) - n
     deficient_perfect_or_abundant_cache[n] = k
     return k        
 
+
 class Test(unittest.TestCase):        
-    def testSample(self):
-        self.assertEqual(28, sum(proper_divisors(28)))
+    def test_sample(self):
+        self.assertEqual(28, sum(generate_proper_divisors(28)))
         self.assertEquals(0, deficient_perfect_or_abundant(28))
         self.assertLess(0, deficient_perfect_or_abundant(12))
                              
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(4179871, solve())
        
         

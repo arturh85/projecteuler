@@ -26,6 +26,8 @@ import timeit
 def is_leap_year(y):
     if y % 4 == 0: 
         if y % 100 == 0:
+            if y % 400 == 0:
+                return True
             return False
         return True
     return False
@@ -55,17 +57,17 @@ def solve():
     return cnt
 
 class Test(unittest.TestCase):        
-    def testLeapYears(self):
+    def test_leap_years(self):
         self.assertEqual(True, is_leap_year(1996))
         self.assertEqual(False, is_leap_year(1997))
-        self.assertEqual(False, is_leap_year(2000))
+        self.assertEqual(True, is_leap_year(2000))
         self.assertEqual(True, is_leap_year(2004))
         
-    def testMethods(self):
+    def test_methods(self):
         self.assertEqual(12, len(_days_in_month))
         self.assertEqual(365, sum(_days_in_month))
                                  
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(171, solve())
         pass
        

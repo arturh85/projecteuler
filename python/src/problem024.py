@@ -53,17 +53,15 @@ def solve(objects='0123456789', index=1000000):
         
  
 class Test(unittest.TestCase):        
-    def testSample(self):
+    def test_sample(self):
         # n! = number of permutations
         self.assertEquals(2, math.factorial(len('01')))
         self.assertEquals(6, math.factorial(len('012')))
         
-        self.assertEquals(['01', '10'], \
-                      list(lexicographic_permutations('01')))
+        self.assertEquals(['01', '10'], list(lexicographic_permutations('01')))
+
         
-        
-        self.assertEquals(['012', '021', '102', '120', '201', '210'], \
-                      list(lexicographic_permutations('012')))
+        self.assertEquals(['012', '021', '102', '120', '201', '210'], list(lexicographic_permutations('012')))
                              
     def testAnswer(self):
         self.assertEquals('2783915460', solve())

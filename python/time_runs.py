@@ -6,6 +6,7 @@ Created on 04.02.2012
 
 import timeit
 import os
+from time import time
 
 os.chdir("src")
 
@@ -130,6 +131,8 @@ def makeline(nr, name, result, link1, link2):
 f.write(makeline("#", "Name", "Seconds", "", ""))
 f.write(makeline("-" * 4, "-" * 40, "-" * 10, "-" * 60, "-" * 100))
 
+begin_time = time()
+
 for o in range(1, 101):
     try:
         t = timeit.Timer("run()", "from src.problem%03d" % o + " import run")
@@ -151,5 +154,13 @@ for o in range(1, 101):
     f.write(line)
     print o, name, result
 
+
+summary = "\n\nOverall time: " + str(time() - begin_time) + " seconds.\n\n"
+
+print summary
+f.write(summary)
+
 f_tmpl.close()
 f.close()
+
+

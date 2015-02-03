@@ -34,29 +34,24 @@ def generate_pentagonal_numbers():
 def is_pentagonal_number(n):
     return is_number(pentagonal_numbers_at, 'pentagonal', n)
 
+def pentagonal_numbers_upto(limit):
+    i = 0
+    lst = []
+    for num in generate_pentagonal_numbers():
+        lst.append(num)
+        i += 1
+        if i == limit:
+            return lst
 
-def solve():
-    min_distance = 999999
-    for a in range(1, 1000):
-        for b in range(1, 1000):
-            if a >= b:
-                continue
-            c = pentagonal_numbers_at(a)
-            d = pentagonal_numbers_at(b)
-
-            p_sum = c + d
-            p_distance = abs(c - d)
-
-            # print "c " + str(c)
-            # print "d " + str(d)
-
-            if is_pentagonal_number(p_sum) and is_pentagonal_number(p_distance):
-                min_distance = p_distance
-
-                break
-
-    return min_distance
-
+def solve(upto=3500):
+    numbers = pentagonal_numbers_upto(upto)
+    for i1 in range(0, upto):
+        i1 = upto - i1
+        for i2 in range(i1, upto - i1):
+            a = numbers[i1]
+            b = numbers[i2]
+            if abs(a - b) in numbers and a + b in numbers:
+                return abs(a - b)
 
 class Test(unittest.TestCase):
     def test_sample(self):
@@ -68,14 +63,18 @@ class Test(unittest.TestCase):
         pass
 
     def test_answer(self):
-        self.assertEqual(42, solve())
+        self.assertTrue(is_pentagonal_number(1560090))
+        self.assertTrue(is_pentagonal_number(7042750))
+        self.assertTrue(is_pentagonal_number(7042750 + 1560090))
+        self.assertTrue(is_pentagonal_number(7042750 - 1560090))
+        self.assertEqual(5482660, solve())
         pass
 
 
 # -----------------------------------------
 
 def run():
-    raise Exception("not implemented")
+    return solve()
 
 
 if __name__ == '__main__':

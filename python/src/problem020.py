@@ -20,26 +20,29 @@ import math
 
 def factorial_sum(n):
     fsum = 0
-    
+
     for character in str(math.factorial(n)):
         fsum += int(character)
-      
+
     return fsum
+
+def factorial_sum_functional(n):
+    return sum(map(int, list(str(math.factorial(n)))))
 
 
 class Test(unittest.TestCase):        
-    def testSample(self):
-        self.assertEqual(27, factorial_sum(10))
+    def test_sample(self):
+        self.assertEqual(27, factorial_sum_functional(10))
                                  
-    def testAnswer(self):
-        self.assertEqual(648, factorial_sum(100))
+    def test_answer(self):
+        self.assertEqual(648, factorial_sum_functional(100))
         pass
        
         
 # -----------------------------------------
 
 def run():
-    return factorial_sum(100)
+    return factorial_sum_functional(100)
 
 if __name__ == '__main__':
     unittest.main()
