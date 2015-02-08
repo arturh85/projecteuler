@@ -42,17 +42,41 @@ Created on 31.01.2012
 '''
 import unittest
 import timeit
+import sys
 
 subroute_lookup_table = {}
 
-def max_sum_route(triangle, lookahead):
+
+
+HEADER = '\033[95m'
+OKBLUE = '\033[94m'
+OKGREEN = '\033[92m'
+WARNING = '\033[93m'
+FAIL = '\033[91m'
+ENDC = '\033[0m'
+BOLD = '\033[1m'
+UNDERLINE = '\033[4m'
+
+
+def max_sum_route(triangle, lookahead, print_route=False):
     subroute_lookup_table.clear()
     lookahead = max(1, lookahead)
     i = 0
     pathsum = 0
     
+    bottom_row_length = len(triangle[len(triangle) - 1])
     for line in range(0, len(triangle)):
         value = triangle[line][i]
+        if print_route:
+            for k in range(bottom_row_length/2 - line/2):
+                sys.stdout.write("  ")
+            for j in range(0, len(triangle[line])):
+                c = str(triangle[line][j])
+                if j == i:
+                    c = FAIL + str(c) + ENDC
+                sys.stdout.write(c + " ")
+            sys.stdout.write("\n")
+
         pathsum += value
                 
         if line < len(triangle)-1:
@@ -66,9 +90,7 @@ def max_sum_route(triangle, lookahead):
                 i += 1
         
     return pathsum
-
-
-
+    
 def max_sum_subroute(triangle, i, startline, endline):
     lookup_index = startline * 100000 + i + endline * 1000
     if subroute_lookup_table.has_key(lookup_index):
@@ -141,7 +163,10 @@ class Test(unittest.TestCase):
         self.assertEqual(1074, max_sum_route(triangle_2, 2))
         self.assertEqual(1074, max_sum_route(triangle_2, 3))
         self.assertEqual(1074, max_sum_route(triangle_2, 15))
-       
+        
+    def test_print(self):
+        self.assertEqual(1074, max_sum_route(triangle_2, 3, True))
+
         
 # -----------------------------------------
 
@@ -149,7 +174,8 @@ def run():
     return max_sum_route(triangle_2, 2)
 
 if __name__ == '__main__':
-    unittest.main()
+    # unittest.main()
+    max_sum_route(triangle_2, 2, True)
 
 if __name__ == '__main__':
     t = timeit.Timer("run()", "from __main__ import run")

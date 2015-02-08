@@ -73,7 +73,8 @@ def run():
     return max_sum_route(triangle_2, 79)
 
 if __name__ == '__main__':
-    unittest.main()
+    # unittest.main()
+    max_sum_route(triangle_2, 79, True)
 
 if __name__ == '__main__':
     t = timeit.Timer("run()", "from __main__ import run")
