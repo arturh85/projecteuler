@@ -28,44 +28,51 @@ Created on 29.01.2012
 import unittest
 import timeit
 
+
 def sequence(start):
     i = start
-    while(i != 1):
+    while i != 1:
         yield i
         i = sequence_next(i)
     yield i
-    
+
+
 def sequence_next(n):
-    if n % 2 == 0: 
+    if n % 2 == 0:
         return n/2
     else:
         return 3*n+1
+
 
 def sequence_list(start):
     lst = []
     for i in sequence(start):
         lst.append(i)
-        
+
     return lst
 
-def sequence_length(i):    
-    cnt = 1
-    while i != 1:
-        if i % 2 == 0:
-            i = i / 2
-        else:
-            i = 3 * i + 1
 
-        cnt += 1
+sequence_length_cache = {}
 
-    return cnt
+
+def sequence_length(i):   
+    global sequence_length_cache
+    if i == 1:
+        return 1
+    
+    if i in sequence_length_cache:
+        return sequence_length_cache[i]
+
+    subsequence_length = 1 + sequence_length(sequence_next(i))
+    sequence_length_cache[i] = subsequence_length
+    return subsequence_length
 
 
 def solve(limit=1000000):
     longest_cnt = 0
     longest_start = 0
     
-    for i in xrange(1,limit):
+    for i in xrange(1, limit):
         cnt = sequence_length(i)
         
         if cnt > longest_cnt:
@@ -74,11 +81,12 @@ def solve(limit=1000000):
             
     return longest_start
 
+
 class Test(unittest.TestCase):
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual([13, 40, 20, 10, 5, 16, 8, 4, 2, 1], sequence_list(13))
             
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(837799, solve())
        
         
@@ -94,5 +102,3 @@ if __name__ == '__main__':
     t = timeit.Timer("run()", "from __main__ import run")
     count = 1
     print str(t.timeit(count)) + " seconds for " + str(count) + " runs"
-    
-    
