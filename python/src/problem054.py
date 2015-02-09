@@ -105,7 +105,7 @@ def _score_royal_flush(hand):
     if straight_flush_score == 0:
         return 0
     
-    return 2000 + straight_flush_score
+    return 1000000 + straight_flush_score
 
 
 def _score_straight_flush(hand):
@@ -117,7 +117,7 @@ def _score_straight_flush(hand):
     if straight_score == 0:
         return 0
     
-    return 2000 + straight_score
+    return 2600000 + straight_score
 
 
 def _score_four_of_a_kind(hand):
@@ -127,7 +127,7 @@ def _score_four_of_a_kind(hand):
         return 0
     others = [x for x, y in collections.Counter(card_values).items() if y == 1]
     
-    return 3000 + 10 * four_of_a_kinds[0] + others[0]
+    return 1100000 + 100000 * four_of_a_kinds[0] + others[0]
 
 
 def _score_full_house(hand):
@@ -139,7 +139,7 @@ def _score_full_house(hand):
     if len(three_of_a_kinds) != 1:
         return 0
 
-    return 1400 + 100 * three_of_a_kinds[0] + 10 * pairs[0]
+    return 1012000 + 10000 * three_of_a_kinds[0] + 10 * pairs[0]
 
 
 def _score_flush(hand):
@@ -147,7 +147,7 @@ def _score_flush(hand):
     suites = set(map(card_suite, hand))
     if len(suites) != 1:
         return 0
-    return 1300 + sum(card_values)
+    return 880000 + _score_values(card_values)
 
 
 def _score_straight(hand):
@@ -156,7 +156,7 @@ def _score_straight(hand):
     for i in range(len(card_values) - 1):
         if card_values[i] + 1 != card_values[i + 1]:
             return 0
-    return 1200 + sum(card_values)
+    return 750000 + _score_values(card_values)
 
 
 def _score_three_of_a_kind(hand):
@@ -166,7 +166,7 @@ def _score_three_of_a_kind(hand):
         return 0
     others = [x for x, y in collections.Counter(card_values).items() if y == 1]
 
-    return 700 + 30 * pairs[0] + sum(others)
+    return 600000 + 3000 * pairs[0] + _score_values(others)
 
 
 def _score_two_pairs(hand):
@@ -176,7 +176,7 @@ def _score_two_pairs(hand):
         return 0
 
     others = [x for x, y in collections.Counter(card_values).items() if y == 1]
-    return 200 + 20 * pairs[0] + 20 * pairs[1] + sum(others)
+    return 520000 + 200 * pairs[0] + 200 * pairs[1] + _score_values(others)
 
 
 def _score_one_pair(hand):
@@ -186,12 +186,14 @@ def _score_one_pair(hand):
         return 0
 
     others = [x for x, y in collections.Counter(card_values).items() if y == 1]
-    return 60 + 10 * pairs[0] + sum(others)
+    return 130000 + 20000 * pairs[0] + _score_values(others)
         
+
 
 def _score_high_card(hand):
     card_values = map(card_value, hand)
-    return 2 * max(card_values) + sum(card_values)
+    return _score_values(card_values)
+
 
 
 def score_hand(hand):
@@ -244,13 +246,50 @@ def solve():
 def parse(s):
     return s.split(" ")
 
+def _score_values(values):
+    values.sort()
+
+    multiplier = 10000
+    score = 0
+
+    while len(values) > 0:
+        val = values.pop()
+        if not val:
+            break
+        val -= 2
+        score += multiplier * val
+        multiplier /= 10
+    return score
+
+def tmp_score_hand(hand):
+    card_values = map(card_value, hand)
+    return _score_values2(card_values)
+
+def _score_values2(values):
+    values.sort()
+    multiplier = 10000
+    score = 0
+
+    while len(values) > 0:
+        val = values.pop()
+        if not val:
+            break
+        val -= 2
+        print "  +", val, "*", multiplier, "=", score, "+", multiplier * val, "=", score + multiplier * val
+        score += multiplier * val
+        multiplier /= 10
+    print "=> ", score
+    return score
+
 
 class Test(unittest.TestCase):
     def test_sample(self):
         self.assertEqual(14, card_value('AD'))
-        self.assertEqual(75, score_hand(['5D', '8C', '9S', 'JS', 'AC']))
-        self.assertEqual(136, score_hand(['5H', '5C', '6S', '7S', 'KD']))
-        
+
+        # tmp_score_hand(parse('5H 5C 6S 7S KD'))
+        # tmp_score_hand(parse('2C 3S 8S 8D TD'))
+
+
         self.assertFalse(player1_wins([parse('5H 5C 6S 7S KD'), parse('2C 3S 8S 8D TD')]))
         self.assertTrue(player1_wins([parse('5D 8C 9S JS AC'), parse('2C 5C 7D 8S QH')]))
         self.assertFalse(player1_wins([parse('2D 9C AS AH AC'), parse('3D 6D 7D TD QD')]))
@@ -258,30 +297,47 @@ class Test(unittest.TestCase):
         self.assertTrue(player1_wins([parse('2H 2D 4C 4D 4S'), parse('3C 3D 3S 9S 9D')]))
         pass
     
+    def test_score_values(self):
+        ace_high = ['2D', '3C', '4S', '5S', 'AC']
+        king_high = ['8D', '9C', 'JS', 'QS', 'KC']
+        self.assertGreater(score_hand(ace_high), score_hand(king_high))
+
     def test_limits(self):
-        self.assertEqual(35, score_hand(['2D', '3C', '4S', '5S', '7C'])) # worst high card possible
-        self.assertEqual(87, score_hand(['9D', 'JC', 'QS', 'KS', 'AC'])) # best high card possible
-        self.assertEqual(92, score_hand(['2D', '2C', '3S', '4S', '5C'])) # worst one-pair possible
-        self.assertEqual(236, score_hand(['AD', 'AC', 'KS', 'QS', 'JC'])) # best one-pair possible
-        self.assertEqual(304, score_hand(['2D', '2C', '3S', '3S', '4C'])) # worst two-pair possible
-        self.assertEqual(752, score_hand(['AD', 'AC', 'KS', 'KS', 'QC'])) # best two-pair possible
-        self.assertEqual(767, score_hand(['2D', '2C', '2S', '3S', '4D'])) # worst three of a kind possible
-        self.assertEqual(1145, score_hand(['AD', 'AC', 'AS', 'KS', 'QD'])) # best three of a kind possible
-        self.assertEqual(1220, score_hand(['2D', '3C', '4S', '5S', '6D'])) # worst straight possible
-        self.assertEqual(1260, score_hand(['AD', 'KC', 'QS', 'JD', 'TD'])) # best straight possible
-        self.assertEqual(1321, score_hand(['2D', '3D', '4D', '5D', '7D'])) # worst flush possible
-        self.assertEqual(1359, score_hand(['AS', 'KS', 'QS', 'JS', '9S'])) # best flush possible
-        self.assertEqual(1630, score_hand(['2D', '2S', '2C', '3S', '3D'])) # worst full house possible
-        self.assertEqual(2930, score_hand(['AD', 'AS', 'AC', 'KS', 'KD'])) # best full house possible
-        self.assertEqual(3023, score_hand(['2D', '2S', '2C', '2S', '3D'])) # worst four of a kind possible
-        self.assertEqual(3153, score_hand(['AD', 'AS', 'AC', 'AS', 'KD'])) # best four of a kind possible
-        self.assertEqual(3220, score_hand(['2D', '3D', '4D', '5D', '6D'])) # worst straight-flush possible
-        self.assertEqual(3255, score_hand(['KD', 'QD', 'JD', 'TD', '9D'])) # best straight-flush possible
-        self.assertEqual(5260, score_hand(['AD', 'KD', 'QD', 'JD', 'TD'])) # royal flush
-        pass
+        test_hands = {
+            '01 worst high card possible':  ['2D', '3C', '4S', '5S', '7C'],
+            '02 best high card possible': ['9D', 'JC', 'QS', 'KS', 'AC'],
+            '03 worst one-pair possible': ['2D', '2C', '3S', '4S', '5C'],
+            '04 best one-pair possible': ['AD', 'AC', 'KS', 'QS', 'JC'],
+            '05 worst two-pair possible': ['2D', '2C', '3S', '3S', '4C'],
+            '06 best two-pair possible': ['AD', 'AC', 'KS', 'KS', 'QC'],
+            '07 worst three of a kind possible': ['2D', '2C', '2S', '3S', '4D'],
+            '08 best three of a kind possible': ['AD', 'AC', 'AS', 'KS', 'QD'],
+            '09 worst straight possible': ['2D', '3C', '4S', '5S', '6D'],
+            '10 best straight possible': ['AD', 'KC', 'QS', 'JD', 'TD'],
+            '11 worst flush possible': ['2D', '3D', '4D', '5D', '7D'],
+            '12 best flush possible': ['AS', 'KS', 'QS', 'JS', '9S'],
+            '13 worst full house possible': ['2D', '2S', '2C', '3S', '3D'],
+            '14 best full house possible': ['AD', 'AS', 'AC', 'KS', 'KD'],
+            '15 worst four of a kind possible': ['2D', '2S', '2C', '2S', '3D'],
+            '16 best four of a kind possible': ['AD', 'AS', 'AC', 'AS', 'KD'],
+            '17 worst straight-flush possible': ['2D', '3D', '4D', '5D', '6D'],
+            '18 best straight-flush possible': ['KD', 'QD', 'JD', 'TD', '9D'],
+            '19 royal flush': ['AD', 'KD', 'QD', 'JD', 'TD']
+        }
+
+        keys = test_hands.keys()
+        keys.sort()
+
+        last = 0
+        for key in keys:
+            score = score_hand(test_hands[key])
+            # print str(score) + ":", key
+            self.assertGreater(score, last)
+            last = score
+        
 
     def test_answer(self):
-        self.assertEqual(389, solve())
+        self.assertEqual(369, solve())
         pass
 
 
