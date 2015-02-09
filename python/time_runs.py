@@ -125,7 +125,7 @@ while line:
 f.write("\n")
 
 def makeline(nr, name, result, link1, link2):
-    return "| " + str(nr).rjust(4) + " | " + name.rjust(40) + " | " + result.rjust(10) + " | " + \
+    return "| " + str(nr).rjust(4) + " | " + name.rjust(40) + " | " + result.rjust(14) + " | " + \
           link1.rjust(60) + " | " + link2.rjust(100) + " |\n"
 
 f.write(makeline("#", "Name", "Seconds", "", ""))
