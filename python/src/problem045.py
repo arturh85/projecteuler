@@ -38,11 +38,11 @@ def is_hexagonal_number(n):
     return is_number(hexagonal_number_at, 'hexagonal', n)
 
 
-# FIXME: way to slow, 88s
 def solve():
-    for triangle_number in generate_triangle_numbers():
-        if triangle_number > 40755 and is_pentagonal_number(triangle_number) and is_hexagonal_number(triangle_number):
-            return triangle_number
+    # all hexagonal numbers are also triangle numbers
+    for hexagonal_number in generate_hexagonal_number():
+        if hexagonal_number > 40755 and is_pentagonal_number(hexagonal_number):
+            return hexagonal_number
 
 class Test(unittest.TestCase):
     def test_sample(self):

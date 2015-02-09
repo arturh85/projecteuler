@@ -21,8 +21,8 @@ import math
 
 def find_solutions(p):
     solutions = []
-    for a in range(1, p):
-        for b in range(1, p):
+    for a in range(1, p/4+1):
+        for b in range(a+1, (p-a)/2):
             if a + b >= p:
                 continue
             c = math.sqrt(a*a + b*b)
