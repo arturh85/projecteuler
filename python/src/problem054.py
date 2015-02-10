@@ -127,7 +127,7 @@ def _score_four_of_a_kind(hand):
         return 0
     others = [x for x, y in collections.Counter(card_values).items() if y == 1]
     
-    return 1100000 + 100000 * four_of_a_kinds[0] + others[0]
+    return 2600000 + 100000 * four_of_a_kinds[0] + others[0]
 
 
 def _score_full_house(hand):
@@ -139,7 +139,7 @@ def _score_full_house(hand):
     if len(three_of_a_kinds) != 1:
         return 0
 
-    return 1012000 + 10000 * three_of_a_kinds[0] + 10 * pairs[0]
+    return 2412000 + 10000 * three_of_a_kinds[0] + 10 * pairs[0]
 
 
 def _score_flush(hand):
@@ -147,7 +147,7 @@ def _score_flush(hand):
     suites = set(map(card_suite, hand))
     if len(suites) != 1:
         return 0
-    return 880000 + _score_values(card_values)
+    return 2200000 + _score_values(card_values)
 
 
 def _score_straight(hand):
@@ -156,7 +156,7 @@ def _score_straight(hand):
     for i in range(len(card_values) - 1):
         if card_values[i] + 1 != card_values[i + 1]:
             return 0
-    return 750000 + _score_values(card_values)
+    return 2050000 + _score_values(card_values)
 
 
 def _score_three_of_a_kind(hand):
@@ -166,7 +166,7 @@ def _score_three_of_a_kind(hand):
         return 0
     others = [x for x, y in collections.Counter(card_values).items() if y == 1]
 
-    return 600000 + 3000 * pairs[0] + _score_values(others)
+    return 1900000 + 3000 * pairs[0] + _score_values(others)
 
 
 def _score_two_pairs(hand):
@@ -176,7 +176,7 @@ def _score_two_pairs(hand):
         return 0
 
     others = [x for x, y in collections.Counter(card_values).items() if y == 1]
-    return 520000 + 200 * pairs[0] + 200 * pairs[1] + _score_values(others)
+    return 1720000 + 200 * pairs[0] + 200 * pairs[1] + _score_values(others)
 
 
 def _score_one_pair(hand):
@@ -186,7 +186,7 @@ def _score_one_pair(hand):
         return 0
 
     others = [x for x, y in collections.Counter(card_values).items() if y == 1]
-    return 130000 + 20000 * pairs[0] + _score_values(others)
+    return 130000 + 100000 * pairs[0] + _score_values(others)
         
 
 
@@ -302,6 +302,11 @@ class Test(unittest.TestCase):
         king_high = ['8D', '9C', 'JS', 'QS', 'KC']
         self.assertGreater(score_hand(ace_high), score_hand(king_high))
 
+        ace_pair = ['2D', '3C', '4S', 'AS', 'AC']
+        king_pair = ['TD', 'JC', 'QS', 'KS', 'KC']
+        self.assertGreater(score_hand(ace_pair), score_hand(king_pair))
+		
+
     def test_limits(self):
         test_hands = {
             '01 worst high card possible':  ['2D', '3C', '4S', '5S', '7C'],
@@ -331,7 +336,7 @@ class Test(unittest.TestCase):
         last = 0
         for key in keys:
             score = score_hand(test_hands[key])
-            # print str(score) + ":", key
+            print str(score) + ":", key
             self.assertGreater(score, last)
             last = score
         
