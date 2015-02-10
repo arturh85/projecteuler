@@ -350,8 +350,7 @@ class Test(unittest.TestCase):
 
 
 def run():
-    raise Exception("not implemented")
-    pass
+    return solve()
 
 
 if __name__ == '__main__':

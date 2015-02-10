@@ -29,21 +29,21 @@ def add_coins(state, coins):
 
 def solve(n=200):
     global british_coins
-    cnt = 0
-    for a in range(n, -1, -british_coins[7]):
-        for b in range(a, -1, -british_coins[6]):
-            for c in range(b, -1, -british_coins[5]):
-                for d in range(c, -1, -british_coins[4]):
-                    for e in range(d, -1, -british_coins[3]):
-                        for f in range(e, -1, -british_coins[2]):
-                            for g in range(f, -1, -british_coins[1]):
-                                cnt += 1
-    return cnt
+    return solve_recursive(n, british_coins, 0)
+    
 
-
+def solve_recursive(n, coins, i):
+    if i == len(coins)-1:
+        return 1
+    coin = coins[len(coins)-i-1]
+    m = 0
+    for a in range(n, -1, -coin):
+        m += solve_recursive(a, coins, i+1)
+    return m
+    
+    
 class Test(unittest.TestCase):
     def test_sample(self):
-        
         self.assertEquals(200, sum([1 * 100, 1 * 50, 2 * 20, 1 * 5, 1 * 2, 3 * 1]))
         self.assertEqual(1, solve(1))
         self.assertEqual(2, solve(2))
@@ -60,6 +60,9 @@ class Test(unittest.TestCase):
 
 def run():
     return solve()
+
+if __name__ == '__main__':
+    unittest.main()
 
 
 if __name__ == '__main__':
