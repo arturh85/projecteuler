@@ -131,6 +131,7 @@ def makeline(nr, name, result, link1, link2):
 f.write(makeline("#", "Name", "Seconds", "", ""))
 f.write(makeline("-" * 4, "-" * 40, ("-" * 13) + ":", "-" * 60, "-" * 100))
 
+overall = 0.0
 begin_time = time()
 
 for o in range(1, 101):
@@ -138,7 +139,9 @@ for o in range(1, 101):
         t = timeit.Timer("run()", "from src.problem%03d" % o + " import run")
         seconds = t.timeit(1)
         # seconds = 3.3
-        result = str(round(seconds, 4)).ljust(6, '0')
+        result = round(seconds, 1)
+        overall += result
+        result = str(result).ljust(3, '0')
         if seconds > 60:
             result = "**" + result + "**"
     except Exception as e:
@@ -155,8 +158,11 @@ for o in range(1, 101):
     print o, name, result
 
 
-summary = "\n\nOverall time: " + str(time() - begin_time) + " seconds.\n\n"
+summary = "\n\nOverall time: " + str(overall) + " seconds.\n"
+print summary
+f.write(summary)
 
+summary = "Generation time: " + str(round(time() - begin_time, 1)) + " seconds.\n\n"
 print summary
 f.write(summary)
 
