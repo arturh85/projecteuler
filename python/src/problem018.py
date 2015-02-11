@@ -146,7 +146,7 @@ triangle_3 = [
 ]
 
 class Test(unittest.TestCase):        
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual(23, max_sum_route(triangle_1, 1))
         self.assertEqual(23, max_sum_route(triangle_1, 2))
         
@@ -158,7 +158,7 @@ class Test(unittest.TestCase):
         self.assertEqual(11111116, max_sum_route(triangle_3, 5))
 
                                  
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(1064, max_sum_route(triangle_2, 1))
         self.assertEqual(1074, max_sum_route(triangle_2, 2))
         self.assertEqual(1074, max_sum_route(triangle_2, 3))

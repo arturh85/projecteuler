@@ -42,7 +42,7 @@ class Test(unittest.TestCase):
         self.assertTrue(is_pythagorean_triplet(3,4,5))
     def testSimple2(self):
         self.assertFalse(is_pythagorean_triplet(3,4,6))
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(31875000, solve(1000))
        
         

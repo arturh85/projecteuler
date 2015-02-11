@@ -129,7 +129,7 @@ def makeline(nr, name, result, link1, link2):
           link1.rjust(60) + " | " + link2.rjust(100) + " |\n"
 
 f.write(makeline("#", "Name", "Seconds", "", ""))
-f.write(makeline("-" * 4, "-" * 40, "-" * 10, "-" * 60, "-" * 100))
+f.write(makeline("-" * 4, "-" * 40, ("-" * 13) + ":", "-" * 60, "-" * 100))
 
 begin_time = time()
 

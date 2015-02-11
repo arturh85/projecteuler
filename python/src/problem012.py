@@ -109,10 +109,10 @@ class Test(unittest.TestCase):
         self.assertEqual(6, count_factors(28))
         
         self.assertEqual(8, count_factors(42))        
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual(28, solve(5))
     
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(76576500, solve(500))
        
         

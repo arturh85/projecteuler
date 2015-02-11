@@ -34,9 +34,9 @@ def solve_functional(limit=1000):
 
 
 class Test(unittest.TestCase):
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual(23, solve_functional(10))
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(233168, solve_functional())
         
         

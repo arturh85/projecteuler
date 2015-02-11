@@ -37,9 +37,9 @@ def solve(limit=20):
 
 
 class Test(unittest.TestCase):
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual(2520, solve(10))
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(232792560, solve())
         
        

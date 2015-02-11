@@ -42,11 +42,11 @@ def solve(over=1000):
         i += 1
         
 class Test(unittest.TestCase):        
-    def testSample(self):
+    def test_sample(self):
         self.assertEquals(100, 10**2)
         self.assertEquals(12, solve(10**2))
                              
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEquals(4782, solve(10**999))
        
         

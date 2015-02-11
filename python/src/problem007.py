@@ -28,9 +28,9 @@ class Test(unittest.TestCase):
         self.assertEqual(2, prime_at(1))
     def testSimple2(self):
         self.assertEqual(3, prime_at(2))
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual(13, prime_at(6))
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(104743, prime_at(10001))
        
         

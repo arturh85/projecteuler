@@ -63,7 +63,7 @@ class Test(unittest.TestCase):
         
         self.assertEquals(['012', '021', '102', '120', '201', '210'], list(lexicographic_permutations('012')))
                              
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEquals('2783915460', solve())
        
         

@@ -34,10 +34,10 @@ def solve(limit=100):
     return len(set(values))
 
 class Test(unittest.TestCase):
-    def testSample(self):
+    def test_sample(self):
         self.assertEquals(15, solve(5))
 
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEquals(9183, solve(100))
         pass
 

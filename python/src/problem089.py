@@ -117,7 +117,7 @@ def parse_roman_numeral(numeral):
     for c in numeral:
         if c not in mapping: 
             raise ValueError("unknown char: " + c)
-        
+
         current_order = order.index(c)
         if current_order < last_order:
             s -= mapping[order[last_order]] * 2
@@ -160,6 +160,9 @@ class Test(unittest.TestCase):
         self.assertEqual('CM', format_roman_numeral(900))
         self.assertEqual('MMMMDXCV', format_roman_numeral(4595))
         self.assertEqual('XCV', format_roman_numeral(95))
+        
+        for i in range(10000):
+            self.assertEqual(i, parse_roman_numeral(format_roman_numeral(i)))
         pass
     
     def test_answer(self):

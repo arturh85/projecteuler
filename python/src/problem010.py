@@ -42,7 +42,7 @@ class Test(unittest.TestCase):
             
     def testSampl(self):
         self.assertEqual(17, prime_sum(10))
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(142913828922, prime_sum(2000000))
        
         

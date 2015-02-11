@@ -71,11 +71,11 @@ class Test(unittest.TestCase):
         self.assertFalse(is_pandigital(2))
         self.assertTrue(is_pandigital(1))
 
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual([39, 186, 7254], find_identity(list(str(391867254))))
         pass
                              
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(45228, solve())
         pass
        

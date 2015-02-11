@@ -111,7 +111,7 @@ class Test(unittest.TestCase):
         self.assertEqual("zero", digit_to_english(0))
         self.assertEqual("five", digit_to_english(5))
         
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual("twenty", number_to_english(20))
         self.assertEqual("forty", number_to_english(40))
         self.assertEqual("twenty-one", number_to_english(21))
@@ -127,7 +127,7 @@ class Test(unittest.TestCase):
         self.assertEqual(20, custom_str_length("one hundred and fifteen"))
         self.assertEqual(19, solve(5))
                                  
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(21124, solve(1000))
         #pass
        

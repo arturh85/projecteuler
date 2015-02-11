@@ -22,9 +22,9 @@ def digit_sum(number):
     return digit_sum
 
 class Test(unittest.TestCase):
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual(26, digit_sum(2**15))
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(1366, digit_sum(2**1000))
        
         

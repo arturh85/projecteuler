@@ -92,7 +92,7 @@ def solve(max=1000):
     return max_n_a * max_n_b
 
 class Test(unittest.TestCase):
-    def testSample(self):
+    def test_sample(self):
         self.assertTrue (check(1, 41, 38))
         self.assertTrue (check(1, 41, 39))
         self.assertTrue (check(1, 41, 40))
@@ -102,7 +102,7 @@ class Test(unittest.TestCase):
         self.assertTrue(check(-79, 1601, 80))
         self.assertFalse(check(-79, 1601, 81))
 
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEquals(-59231, solve())
         pass
 

@@ -73,7 +73,7 @@ def solve(nrStr, count):
     return greatest
 
 class Test(unittest.TestCase):
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(23514624000, solve(nr, 13))
        
         

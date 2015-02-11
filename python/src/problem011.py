@@ -169,7 +169,7 @@ def solve(grid, cols, rows):
     return greatest
 
 class Test(unittest.TestCase):
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(70600674, solve(grid, 20, 20))
        
         

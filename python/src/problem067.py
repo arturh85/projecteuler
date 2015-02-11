@@ -56,11 +56,11 @@ def read_triangle(filename):
 triangle_2 = read_triangle("data/problem067.txt")
 
 class Test(unittest.TestCase):        
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual(23, max_sum_route(triangle_1, 1))
         self.assertEqual(23, max_sum_route(triangle_1, 2))
                                  
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(7269, max_sum_route(triangle_2, 78))
         self.assertEqual(7273, max_sum_route(triangle_2, 79))
         self.assertEqual(7273, max_sum_route(triangle_2, 90))

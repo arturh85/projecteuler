@@ -45,11 +45,11 @@ def binomial_coefficient(n, k):
     return math.factorial(n) / (math.factorial(k) * math.factorial(n-k)) 
 
 class Test(unittest.TestCase):
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual(6, solve(2))
-    def testSample2(self):
+    def test_sample2(self):
         self.assertEqual(20, solve(3))
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(137846528820, solve(20))
        
         

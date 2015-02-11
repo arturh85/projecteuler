@@ -37,9 +37,9 @@ def solve(limit=100):
     return (sumSingle * sumSingle) - sumSquared
 
 class Test(unittest.TestCase):
-    def testSample(self):
+    def test_sample(self):
         self.assertEqual(2640, solve(10))
-    def testAnswer(self):
+    def test_answer(self):
         self.assertEqual(25164150, solve())
        
         
