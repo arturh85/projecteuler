@@ -90,25 +90,25 @@ def max_sum_route(triangle, lookahead, print_route=False):
                 i += 1
         
     return pathsum
+
     
-def max_sum_subroute(triangle, i, startline, endline):
-    lookup_index = startline * 100000 + i + endline * 1000
+def max_sum_subroute(triangle, i, start_line, end_line):
+    lookup_index = start_line * 100000 + i + end_line * 1000
     if subroute_lookup_table.has_key(lookup_index):
         return subroute_lookup_table.get(lookup_index)
-    
-    pathsum = triangle[startline][i]
-    if startline != endline:
-        path1 = max_sum_subroute(triangle, i, startline+1, endline)
-        path2 = max_sum_subroute(triangle, i+1, startline+1, endline)
+    path_sum = triangle[start_line][i]
+    if start_line != end_line:
+        path1 = max_sum_subroute(triangle, i, start_line+1, end_line)
+        path2 = max_sum_subroute(triangle, i+1, start_line+1, end_line)
         
         if path1 > path2:
-            pathsum += path1
+            path_sum += path1
         else:
-            pathsum += path2
+            path_sum += path2
         
-    subroute_lookup_table[lookup_index] = pathsum
+    subroute_lookup_table[lookup_index] = path_sum
     
-    return pathsum    
+    return path_sum
 
 
 triangle_1 = [
@@ -150,7 +150,7 @@ class Test(unittest.TestCase):
         self.assertEqual(23, max_sum_route(triangle_1, 1))
         self.assertEqual(23, max_sum_route(triangle_1, 2))
         
-    def testLookahead(self):
+    def test_lookahead(self):
         self.assertEqual(56, max_sum_route(triangle_3, 1))
         self.assertEqual(56, max_sum_route(triangle_3, 2))
         self.assertEqual(56, max_sum_route(triangle_3, 3))

@@ -24,9 +24,9 @@ def prime_at(nr):
         prime_nr += 1
 
 class Test(unittest.TestCase):
-    def testSimple1(self):
+    def test_simple1(self):
         self.assertEqual(2, prime_at(1))
-    def testSimple2(self):
+    def test_simple2(self):
         self.assertEqual(3, prime_at(2))
     def test_sample(self):
         self.assertEqual(13, prime_at(6))
