@@ -35,6 +35,17 @@ Created on 10.02.2015
 import unittest
 import timeit
 
+mapping = {
+    'I': 1,
+    'V': 5,
+    'X': 10,
+    'L': 50,
+    'C': 100,
+    'D': 500,
+    'M': 1000
+}
+order = ['M', 'D', 'C', 'L', 'X', 'V', 'I']
+
 
 def read_numerals(filename):
     f = open(filename, 'r')
@@ -47,6 +58,42 @@ def read_numerals(filename):
 
 
 def format_roman_numeral(number):
+    global mapping, order
+    sub_numerals = {'I': 10, 'X': 100, 'C': 1000}
+    s = ''
+    for number_char in order:
+        numeral_value = mapping[number_char]
+        # do substraction numerals
+        for sub_char in sub_numerals:
+            sub_value = mapping[sub_char]
+            if 1 <= numeral_value - sub_value <= number < numeral_value <= sub_numerals[sub_char]:
+                s += sub_char
+                number += sub_value
+                
+        # check if char matches
+        if number >= numeral_value:
+            s += number_char * (number / numeral_value)
+            number %= numeral_value
+            if number <= 0:
+                break
+            
+            # do substraction numerals again
+            for sub_char in sub_numerals:
+                sub_value = mapping[sub_char]
+                if 1 <= numeral_value - sub_value <= number < numeral_value <= sub_numerals[sub_char]:
+                    s += sub_char
+                    number += sub_value
+                    
+                    # check if char matches again
+                    if number >= numeral_value:
+                        s += number_char * (number / numeral_value)
+                        number %= numeral_value
+                        if number <= 0:
+                            break
+    return s
+        
+
+def format_roman_numeral_old(number):
     s = ''
     if 900 <= number < 1000:
         s += 'C'
@@ -100,17 +147,8 @@ def format_roman_numeral(number):
 
 
 def parse_roman_numeral(numeral):
-    mapping = {
-        'I': 1,
-        'V': 5,
-        'X': 10,
-        'L': 50,
-        'C': 100,
-        'D': 500,
-        'M': 1000
-    }
-    
-    order = ['M', 'D', 'C', 'L', 'X', 'V', 'I']
+    global mapping, order
+
     last_order = -1
 
     s = 0
@@ -143,28 +181,34 @@ def solve():
 
 
 class Test(unittest.TestCase):
-    def test_sample(self):
-        self.assertEqual(16, parse_roman_numeral('XVI'))
-        self.assertEqual('XVI', format_roman_numeral(16))
-        self.assertEqual(4, parse_roman_numeral('IV'))
-        self.assertEqual('IV', format_roman_numeral(4))
-        self.assertEqual(19, parse_roman_numeral('XIX'))
-        self.assertEqual('XIX', format_roman_numeral(19))
-        self.assertEqual(40, parse_roman_numeral('XL'))
-        self.assertEqual('XL', format_roman_numeral(40))
-        self.assertEqual(90, parse_roman_numeral('XC'))
-        self.assertEqual('XC', format_roman_numeral(90))
-        self.assertEqual(400, parse_roman_numeral('CD'))
-        self.assertEqual('CD', format_roman_numeral(400))
-        self.assertEqual(900, parse_roman_numeral('CM'))
-        self.assertEqual('CM', format_roman_numeral(900))
-        self.assertEqual('MMMMDXCV', format_roman_numeral(4595))
-        self.assertEqual('XCV', format_roman_numeral(95))
-        
-        for i in range(10000):
+    def test_samples(self):
+
+        test_cases = {
+            'I': 1,
+            'II': 2,
+            'IV': 4,
+            'XVI': 16,
+            'XIX': 19,
+            'XLIX': 49,
+            'XL': 40,
+            'XC': 90,
+            'XCV': 95,
+            'CD': 400,
+            'CM': 900,
+            'MMMMDXCV': 4595,
+            'MMMMCMXCIX': 4999
+        }
+        for c in test_cases:
+            self.assertEqual(c, format_roman_numeral(test_cases[c]))
+
+    def test_parse_format_compatibility(self):
+        for i in range(5000):
             self.assertEqual(i, parse_roman_numeral(format_roman_numeral(i)))
-        pass
     
+    def test_old_new_compatibility(self):
+        for i in range(5000):
+            self.assertEqual(format_roman_numeral_old(i), format_roman_numeral(i))
+
     def test_answer(self):
         self.assertEqual(743, solve())
         pass
