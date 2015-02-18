@@ -45,7 +45,6 @@ import collections
 import timeit
 
 
-
 card_values_map = {
     '2': 2,
     '3': 3,
@@ -99,12 +98,12 @@ def _score_royal_flush(hand):
     card_values = map(card_value, hand)
     if max(card_values) != 14:
         return 0
-        
+
     straight_flush_score = _score_straight_flush(hand)
-    
+
     if straight_flush_score == 0:
         return 0
-    
+
     return 1000000 + straight_flush_score
 
 
@@ -112,11 +111,11 @@ def _score_straight_flush(hand):
     suites = set(map(card_suite, hand))
     if len(suites) != 1:
         return 0
-    
+
     straight_score = _score_straight(hand)
     if straight_score == 0:
         return 0
-    
+
     return 2600000 + straight_score
 
 
@@ -126,7 +125,7 @@ def _score_four_of_a_kind(hand):
     if len(four_of_a_kinds) != 1:
         return 0
     others = [x for x, y in collections.Counter(card_values).items() if y == 1]
-    
+
     return 2600000 + 100000 * four_of_a_kinds[0] + others[0]
 
 
@@ -187,7 +186,6 @@ def _score_one_pair(hand):
 
     others = [x for x, y in collections.Counter(card_values).items() if y == 1]
     return 130000 + 100000 * pairs[0] + _score_values(others)
-        
 
 
 def _score_high_card(hand):
@@ -195,10 +193,9 @@ def _score_high_card(hand):
     return _score_values(card_values)
 
 
-
 def score_hand(hand):
     score = _score_royal_flush(hand)
-    if score > 0: 
+    if score > 0:
         return score
     score = _score_straight_flush(hand)
     if score > 0:
@@ -230,7 +227,7 @@ def score_hand(hand):
 def player1_wins(hands):
     score1 = score_hand(hands[0])
     score2 = score_hand(hands[1])
-    
+
     if score1 == score2:
         print hands, score1, score2
 
@@ -245,6 +242,7 @@ def solve():
 
 def parse(s):
     return s.split(" ")
+
 
 def _score_values(values):
     values.sort()
@@ -261,42 +259,16 @@ def _score_values(values):
         multiplier /= 10
     return score
 
-def tmp_score_hand(hand):
-    card_values = map(card_value, hand)
-    return _score_values2(card_values)
-
-def _score_values2(values):
-    values.sort()
-    multiplier = 10000
-    score = 0
-
-    while len(values) > 0:
-        val = values.pop()
-        if not val:
-            break
-        val -= 2
-        print "  +", val, "*", multiplier, "=", score, "+", multiplier * val, "=", score + multiplier * val
-        score += multiplier * val
-        multiplier /= 10
-    print "=> ", score
-    return score
-
 
 class Test(unittest.TestCase):
     def test_sample(self):
         self.assertEqual(14, card_value('AD'))
-
-        # tmp_score_hand(parse('5H 5C 6S 7S KD'))
-        # tmp_score_hand(parse('2C 3S 8S 8D TD'))
-
-
         self.assertFalse(player1_wins([parse('5H 5C 6S 7S KD'), parse('2C 3S 8S 8D TD')]))
         self.assertTrue(player1_wins([parse('5D 8C 9S JS AC'), parse('2C 5C 7D 8S QH')]))
         self.assertFalse(player1_wins([parse('2D 9C AS AH AC'), parse('3D 6D 7D TD QD')]))
         self.assertTrue(player1_wins([parse('4D 6S 9H QH QC'), parse('3D 6D 7H QD QS')]))
         self.assertTrue(player1_wins([parse('2H 2D 4C 4D 4S'), parse('3C 3D 3S 9S 9D')]))
-        pass
-    
+
     def test_score_values(self):
         ace_high = ['2D', '3C', '4S', '5S', 'AC']
         king_high = ['8D', '9C', 'JS', 'QS', 'KC']
@@ -305,44 +277,50 @@ class Test(unittest.TestCase):
         ace_pair = ['2D', '3C', '4S', 'AS', 'AC']
         king_pair = ['TD', 'JC', 'QS', 'KS', 'KC']
         self.assertGreater(score_hand(ace_pair), score_hand(king_pair))
-		
 
     def test_limits(self):
         test_hands = {
-            '01 worst high card possible':  ['2D', '3C', '4S', '5S', '7C'],
-            '02 best high card possible': ['9D', 'JC', 'QS', 'KS', 'AC'],
-            '03 worst one-pair possible': ['2D', '2C', '3S', '4S', '5C'],
-            '04 best one-pair possible': ['AD', 'AC', 'KS', 'QS', 'JC'],
-            '05 worst two-pair possible': ['2D', '2C', '3S', '3S', '4C'],
-            '06 best two-pair possible': ['AD', 'AC', 'KS', 'KS', 'QC'],
+            '01 worst high card possible':       ['2D', '3C', '4S', '5S', '7C'],
+            '02 best high card possible':        ['9D', 'JC', 'QS', 'KS', 'AC'],
+            '03 worst one-pair possible':        ['2D', '2C', '3S', '4S', '5C'],
+            '04 best one-pair possible':         ['AD', 'AC', 'KS', 'QS', 'JC'],
+            '05 worst two-pair possible':        ['2D', '2C', '3S', '3S', '4C'],
+            '06 best two-pair possible':         ['AD', 'AC', 'KS', 'KS', 'QC'],
             '07 worst three of a kind possible': ['2D', '2C', '2S', '3S', '4D'],
-            '08 best three of a kind possible': ['AD', 'AC', 'AS', 'KS', 'QD'],
-            '09 worst straight possible': ['2D', '3C', '4S', '5S', '6D'],
-            '10 best straight possible': ['AD', 'KC', 'QS', 'JD', 'TD'],
-            '11 worst flush possible': ['2D', '3D', '4D', '5D', '7D'],
-            '12 best flush possible': ['AS', 'KS', 'QS', 'JS', '9S'],
-            '13 worst full house possible': ['2D', '2S', '2C', '3S', '3D'],
-            '14 best full house possible': ['AD', 'AS', 'AC', 'KS', 'KD'],
-            '15 worst four of a kind possible': ['2D', '2S', '2C', '2S', '3D'],
-            '16 best four of a kind possible': ['AD', 'AS', 'AC', 'AS', 'KD'],
-            '17 worst straight-flush possible': ['2D', '3D', '4D', '5D', '6D'],
-            '18 best straight-flush possible': ['KD', 'QD', 'JD', 'TD', '9D'],
-            '19 royal flush': ['AD', 'KD', 'QD', 'JD', 'TD']
+            '08 best three of a kind possible':  ['AD', 'AC', 'AS', 'KS', 'QD'],
+            '09 worst straight possible':        ['2D', '3C', '4S', '5S', '6D'],
+            '10 best straight possible':         ['AD', 'KC', 'QS', 'JD', 'TD'],
+            '11 worst flush possible':           ['2D', '3D', '4D', '5D', '7D'],
+            '12 best flush possible':            ['AS', 'KS', 'QS', 'JS', '9S'],
+            '13 worst full house possible':      ['2D', '2S', '2C', '3S', '3D'],
+            '14 best full house possible':       ['AD', 'AS', 'AC', 'KS', 'KD'],
+            '15 worst four of a kind possible':  ['2D', '2S', '2C', '2S', '3D'],
+            '16 best four of a kind possible':   ['AD', 'AS', 'AC', 'AS', 'KD'],
+            '17 worst straight-flush possible':  ['2D', '3D', '4D', '5D', '6D'],
+            '18 best straight-flush possible':   ['KD', 'QD', 'JD', 'TD', '9D'],
+            '19 royal flush':                    ['AD', 'KD', 'QD', 'JD', 'TD'],
         }
-
         keys = test_hands.keys()
         keys.sort()
-
+        error_found = False
         last = 0
         for key in keys:
             score = score_hand(test_hands[key])
-            print str(score) + ":", key
-            self.assertGreater(score, last)
+            if score <= last:
+                error_found = True
+                break
             last = score
-        
+            
+        if error_found:
+            last = 0
+            for key in keys:
+                score = score_hand(test_hands[key])
+                print str(score) + ":", key
+                self.assertGreater(score, last)
+                last = score
 
     def test_answer(self):
-        self.assertEqual(369, solve())
+        self.assertEqual(376, solve())
         pass
 
 
