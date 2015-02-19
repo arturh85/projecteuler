@@ -57,23 +57,23 @@ def read_numerals(filename):
     return numerals
 
 
-def format_roman_numeral(number):
+def format_roman_numeral(n):
     global mapping, order
     sub_numerals = {'I': 10, 'X': 100, 'C': 1000}
     s = ''
     number_index = 0
     while number_index < len(order):
-        number_char = order[number_index]
-        numeral_value = mapping[number_char]
+        numeral_char = order[number_index]
+        numeral_value = mapping[numeral_char]
         for sub_char in sub_numerals:
             sub_value = mapping[sub_char]
-            if 1 <= numeral_value - sub_value <= number < numeral_value <= sub_numerals[sub_char]:
+            if 1 <= numeral_value - sub_value <= n < numeral_value <= sub_numerals[sub_char]:
                 s += sub_char
-                number += sub_value
-        if number >= numeral_value:
-            s += number_char * (number / numeral_value)
-            number %= numeral_value
-            if number <= 0:
+                n += sub_value
+        if n >= numeral_value:
+            s += numeral_char * (n / numeral_value)
+            n %= numeral_value
+            if n <= 0:
                 break
             number_index -= 1
         number_index += 1
