@@ -28,14 +28,17 @@ import timeit
 import sys
 from fractions import Fraction
 
-# ...
-sys.setrecursionlimit(2000)
-
+cache = {}
 
 def converge_square_2(n, x=1):
     if n <= 0:
         return x
-    return x + Fraction(1, converge_square_2(n-1, 2))
+    if x == 2 and n in cache:
+        return cache[n]
+    result = x + Fraction(1, converge_square_2(n-1, 2))
+    if x == 2:
+        cache[n] = result
+    return result
 
 
 def solve(n=1000):

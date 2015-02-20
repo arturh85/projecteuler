@@ -33,12 +33,16 @@ def print_table(table):
     print(s)
 
 
-def spiral(size):
+def spiral(size, clockwise=True):
     table = [[0 for i in range(size)] for j in range(size)]
 
     i = 1
     x = (size/2)
     y = (size/2)
+    
+    if size % 2 == 0:
+        x -= 1
+    
     w = 1
     direction = 0
 
@@ -52,11 +56,17 @@ def spiral(size):
             if direction == 0:
                 x += 1
             if direction == 1:
-                y += 1
+                if clockwise:
+                    y += 1
+                else:
+                    y -= 1
             if direction == 2:
                 x -= 1
             if direction == 3:
-                y -= 1
+                if clockwise:
+                    y -= 1
+                else:
+                    y += 1
 
             # check if index out of bounds
             if x < 0 or x >= size or y < 0 or y >= size:
@@ -69,20 +79,21 @@ def spiral(size):
 
     return table
 
+    
+def diagonals(table, size):
+    lst = []
+    # size = len(table)
+    for i in range(size):
+        lst.append(table[i][i])
+        if i != size / 2:
+            lst.append(table[i][size-i-1])
+
+    return lst
 
 def count_diagonal(table, size):
-    cnt = 0
+    return sum(diagonals(table, size))
 
-    for i in range(0, size):
-        cnt += table[i][i]
-
-        if i != size / 2:
-            cnt += table[i][size-i-1]
-
-    return cnt
-
-
-
+    
 def solve(size=1001):
     table = spiral(size)
     return count_diagonal(table, size)
@@ -91,6 +102,7 @@ def solve(size=1001):
 class Test(unittest.TestCase):
     def test_sample(self):
         self.assertEquals(101, solve(5))
+        pass
 
     def test_answer(self):
         self.assertEquals(669171001, solve(1001))
@@ -102,8 +114,12 @@ class Test(unittest.TestCase):
 def run():
     return solve()
     
+    
 if __name__ == '__main__':
-    t = timeit.Timer("run()", "from __main__ import run")
-    count = 100
-    print(str(t.timeit(count)) + " seconds for " + str(count) + " runs")
+    unittest.main()
+    
+#if __name__ == '__main__':
+#    t = timeit.Timer("run()", "from __main__ import run")
+#    count = 100
+#    print(str(t.timeit(count)) + " seconds for " + str(count) + " runs")
     
