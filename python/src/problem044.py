@@ -17,6 +17,7 @@ Created on 30.01.2015
 @author: ahallmann
 '''
 import unittest
+import math
 import timeit
 
 from problem042 import generate_numbers
@@ -31,8 +32,14 @@ def generate_pentagonal_numbers():
     return generate_numbers(pentagonal_numbers_at)
 
 
+# def is_pentagonal_number(n):
+#     return is_number(pentagonal_numbers_at, 'pentagonal', n)
+
+
 def is_pentagonal_number(n):
-    return is_number(pentagonal_numbers_at, 'pentagonal', n)
+    h = (math.sqrt(24*n+1)+1.0)/6.0
+    return math.floor(h) == h
+
 
 def pentagonal_numbers_upto(limit):
     i = 0
@@ -43,6 +50,7 @@ def pentagonal_numbers_upto(limit):
         if i == limit:
             return lst
 
+
 def solve(upto=3500):
     numbers = pentagonal_numbers_upto(upto)
     for i1 in range(0, upto):
@@ -50,8 +58,9 @@ def solve(upto=3500):
         for i2 in range(i1, upto - i1):
             a = numbers[i1]
             b = numbers[i2]
-            if abs(a - b) in numbers and a + b in numbers:
+            if is_pentagonal_number(abs(a - b)) and is_pentagonal_number(a + b):
                 return abs(a - b)
+
 
 class Test(unittest.TestCase):
     def test_sample(self):

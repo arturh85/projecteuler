@@ -18,6 +18,7 @@ Created on 30.01.2015
 '''
 import unittest
 import timeit
+import math
 
 from problem042 import is_triangle_number
 from problem042 import generate_triangle_numbers
@@ -34,8 +35,13 @@ def generate_hexagonal_number():
     return generate_numbers(hexagonal_number_at)
 
 
+# def is_hexagonal_number(n):
+#     return is_number(hexagonal_number_at, 'hexagonal', n)
+
+
 def is_hexagonal_number(n):
-    return is_number(hexagonal_number_at, 'hexagonal', n)
+    h = (math.sqrt(8*n+1)+1.0)/4.0
+    return math.floor(h) == h
 
 
 def solve():

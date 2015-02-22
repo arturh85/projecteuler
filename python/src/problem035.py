@@ -19,7 +19,7 @@ import timeit
 from problem003 import generate_primes
 from problem003 import is_prime
 
-def rotations(number):
+def generate_rotations(number):
     s = str(number)
     for i in range(1, len(s)):
         s = s[1:] + s[:1]
@@ -27,7 +27,7 @@ def rotations(number):
 
 def is_circular_prime(i):
     circular_primes_list = [i]
-    for rotation in rotations(i):
+    for rotation in generate_rotations(i):
         circular_primes_list.append(rotation)
         if not is_prime(rotation):
             return False

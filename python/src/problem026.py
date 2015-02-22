@@ -32,9 +32,12 @@ import sys
 from problem003 import is_prime
 
 from decimal import *
+
+
 def precise_quotient(numerator, denominator, prec):
     getcontext().prec = prec + 10
     return str(Decimal(numerator) / Decimal(denominator))[0:(prec+2)]
+
 
 def longest_recurring_cycle(s, debug=False):
     for prefix_length in range(len(s)-1):
@@ -50,6 +53,7 @@ def longest_recurring_cycle(s, debug=False):
                     print("cycle found '" + s[prefix_length:(prefix_length + cycle_length)] + "' @ " + s)
                 return cycle_length
     return 0
+
 
 def solve(limit=1000, prec=50, debug=False):
     longest = 0
@@ -71,9 +75,11 @@ def solve(limit=1000, prec=50, debug=False):
         print("longest: 1/" + str(longest_i) + " with len = " + str(longest))
     return longest
 
+
 def test(numerator, denominator, prec=50, debug=False):
     num = precise_quotient(numerator, denominator, prec)
     return longest_recurring_cycle(num.replace("0.", ""), debug)
+
 
 class Test(unittest.TestCase):
     def test_longest_recurring_cycle(self):

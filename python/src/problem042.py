@@ -18,6 +18,7 @@ Created on 30.01.2015
 @author: ahallmann
 '''
 import unittest
+import math
 import timeit
 
 from problem022 import char_value
@@ -63,9 +64,8 @@ def is_number(func, cache_name, n):
 
 
 def is_triangle_number(n):
-    return is_number(triangle_numbers_at, 'triangle', n)
-
-
+    h = (math.sqrt(8*n+1)-1.0)/2.0
+    return math.floor(h) == h
 
 
 def read_words(filename):
